@@ -1,0 +1,10 @@
+{
+  "name": "mobileapp",
+  "integrations": {
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,418 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> ĐỒ ÁN TỐT NGHIỆP K15 </ion-title>
+    <!--<ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment [(ngModel)]="selectedTab">
+    <ion-segment-button value="tab1">
+      Moment
+    </ion-segment-button>
+    <ion-segment-button value="tab2">
+      To day
+    </ion-segment-button>
+    <ion-segment-button value="tab3">
+      Last Week
+    </ion-segment-button>
+    <ion-segment-button value="tab4">
+      Custom
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="selectedTab === 'tab1'">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-row>
+      <ion-col size="12">
+        <ion-row>
+          <!-----------------Tiêu đề DTSU666---------------->
+          <ion-col size="12">
+            <div class="tieude">DTSU666</div>
+          </ion-col>
+          <!--Điện áp pha-->
+          <ion-col size="6">
+            <div class="tieude1">Điện áp pha</div>
+            <ion-grid gutter="0">
+              <ion-row>
+                <ion-col size="4">
+                  <div class="td_upha">Ua</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_upha">{{dtsu_ngay[dtsu_ngay.length - 1].Ua}} <span>VAc</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="4">
+                  <div class="td_upha">Ub</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_upha">{{dtsu_ngay[dtsu_ngay.length - 1].Ub}} <span>VAc</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="4">
+                  <div class="td_upha">Uc</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_upha">{{dtsu_ngay[dtsu_ngay.length - 1].Uc}} <span>VAc</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+
+          <!--Điện áp dây-->
+          <ion-col size="6">
+            <div class="tieude1">Điện áp dây</div>
+            <ion-grid gutter="0">
+              <ion-row>
+                <ion-col size="4">
+                  <div class="td_uday">Uab</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_uday">{{dtsu_ngay[dtsu_ngay.length - 1].Uab}} <span>VAc</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="4">
+                  <div class="td_uday">Ubc</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_uday">{{dtsu_ngay[dtsu_ngay.length - 1].Ubc}} <span>VAc</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="4">
+                  <div class="td_uday">Uca</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_uday">{{dtsu_ngay[dtsu_ngay.length - 1].Uca}} <span>VAc</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <!--Dòng điện pha-->
+          <ion-col size="6">
+            <div class="tieude1">Dòng điện pha</div>
+            <ion-grid gutter="0">
+              <ion-row>
+                <ion-col size="4">
+                  <div class="td_ipha">Ia</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_ipha">{{dtsu_ngay[dtsu_ngay.length - 1].Ia}} <span>A</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="4">
+                  <div class="td_ipha">Ib</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_ipha">{{dtsu_ngay[dtsu_ngay.length - 1].Ib}} <span>A</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="4">
+                  <div class="td_ipha">Ic</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_ipha">{{dtsu_ngay[dtsu_ngay.length - 1].Ic}} <span>A</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <!--Tần số-->
+          <ion-col size="6">
+            <div class="tieude1">Tần số</div>
+            <ion-col size="12">
+              <ion-row>
+                <ion-col size="12">
+                  <div class="pzem_hz">{{dtsu1_ngay[dtsu1_ngay.length - 1].Hz}} <span>Hz</span></div>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-col>
+          <!--Cos phi-->
+          <ion-col size="12">
+            <div class="tieude1">Cosphi</div>
+            <ion-grid gutter="0">
+              <ion-row>
+                <ion-col size="3">
+                  <div class="td_cospha">Cosft</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_cospha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Cosft}}</div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_cospha">Cosfa</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_cospha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Cosfa}}</div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_cospha">Cosfb</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_cospha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Cosfb}}</div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_cospha">Cosfc</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_cospha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Cosfc}}</div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <!--Công suất tiêu thụ pha-->
+          <ion-col size="12">
+            <div class="tieude1">Công suất tiêu thụ pha</div>
+            <ion-grid gutter="0">
+              <ion-row>
+                <ion-col size="3">
+                  <div class="td_ppha">Pft</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_ppha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Pft}} <span>W</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_ppha">Pfa</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_ppha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Pfa}} <span>W</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_ppha">Pfb</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_ppha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Pfb}} <span>W</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_ppha">Pfc</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_ppha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Pfc}} <span>W</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <!--Công suất phản kháng pha-->
+          <ion-col size="12">
+            <div class="tieude1">Công suất phản kháng pha</div>
+            <ion-grid gutter="0">
+              <ion-row>
+                <ion-col size="3">
+                  <div class="td_qpha">Qft</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_qpha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Qft}} <span>Var</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_qpha">Qfa</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_qpha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Qfa}} <span>Var</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_qpha">Qfb</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_qpha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Qfb}} <span>Var</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_qpha">Qfc</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_qpha">{{dtsu1_ngay[dtsu1_ngay.length - 1].Qfc}} <span>Var</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <!--Điện năng phản kháng Q-->
+          <ion-col size="12">
+            <div class="tieude1">Điện năng phản kháng</div>
+            <ion-grid gutter="0">
+              <ion-row>
+                <ion-col size="3">
+                  <div class="td_q">Q1</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_q">{{dtsu2_ngay[dtsu2_ngay.length - 1].Q1}} <span>kVArh</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_q">Q2</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_q">{{dtsu2_ngay[dtsu2_ngay.length - 1].Q2}} <span>kVArh</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_q">Q3</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_q">{{dtsu2_ngay[dtsu2_ngay.length - 1].Q3}} <span>kVArh</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="td_q">Q4</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_q">{{dtsu2_ngay[dtsu2_ngay.length - 1].Q4}} <span>kVArh</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <!--Điện năng tiêu thụ P-->
+          <ion-col size="12">
+            <div class="tieude1">Điện năng tiêu thụ</div>
+            <ion-grid gutter="0">
+              <ion-row>
+                <ion-col size="4">
+                  <div class="td_tong">A_sum</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_tong">{{dtsu2_ngay[dtsu2_ngay.length - 1].A_sum}} <span>kWh</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="4">
+                  <div class="td_tong">A_imp</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_tong">{{dtsu2_ngay[dtsu2_ngay.length - 1].A_imp}} <span>kWh</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col size="4">
+                  <div class="td_tong">A_exp</div>
+                  <ion-row>
+                    <ion-col size="12">
+                      <div class="pzem_tong">{{dtsu2_ngay[dtsu2_ngay.length - 1].A_exp}} <span>kWh</span></div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <!-----------------Tiêu đề PZEM017---------------->
+          <ion-col size="12">
+            <div class="tieude">PZEM-017</div>
+          </ion-col>
+          <!--Điện áp DC-->
+          <ion-col size="6">
+            <div class="tieude1">Điện áp</div>
+            <ion-row>
+              <ion-col size="12">
+                <div class="td_u1">U1</div>
+                <ion-row>
+                  <ion-col size="12">
+                    <div class="pzem_u1">{{pzem_ngay[pzem_ngay.length - 1].U1}} <span>VDc</span></div>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <!--Dòng điện-->
+          <ion-col size="6">
+            <div class="tieude1">Dòng điện</div>
+            <ion-row>
+              <ion-col size="12">
+                <div class="td_u1">I1</div>
+                <ion-row>
+                  <ion-col size="12">
+                    <div class="pzem_u1">{{pzem_ngay[pzem_ngay.length - 1].I1}} <span>A</span></div>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <!--Công suất-->
+          <ion-col size="6">
+            <div class="tieude1">Công suất</div>
+            <ion-row>
+              <ion-col size="12">
+                <div class="td_u1">P1</div>
+                <ion-row>
+                  <ion-col size="12">
+                    <div class="pzem_u1">{{pzem_ngay[pzem_ngay.length - 1].P1}} <span>W</span></div>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <!--Điện năng-->
+          <ion-col size="6">
+            <div class="tieude1">Điện năng</div>
+            <ion-row>
+              <ion-col size="12">
+                <div class="td_u1">A1</div>
+                <ion-row>
+                  <ion-col size="12">
+                    <div class="pzem_u1">{{pzem_ngay[pzem_ngay.length - 1].A1}} <span>Wh</span></div>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+
+  </div>
+
+  <div *ngIf="selectedTab === 'tab2'">
+    <!-- Nội dung của tab 2 -->
+  </div>
+
+  <div *ngIf="selectedTab === 'tab3'">
+    <!-- Nội dung của tab 3 -->
+  </div>
+
+  <div *ngIf="selectedTab === 'tab4'">
+    <!-- Nội dung của tab 3 -->
+  </div>
+
+</ion-content>
